@@ -16,14 +16,14 @@ const data = [
   },
   {
     label: "Dívida de Luís Filipe Vieira [Promovalor] ao Novo Banco",
-    value: 227300000.0,
+    value: 760000000.0,
   },
 ];
 
 const moneyFormatter = (value) =>
   `€ ${format(",.2f")(value).replace("G", "B")}`;
 
-const maxHeight = window.innerHeight * 24;
+const maxHeight = window.innerHeight * 32;
 
 const yScale = scaleLinear({
   domain: [0, data[1].value],
@@ -31,7 +31,7 @@ const yScale = scaleLinear({
 });
 
 const tickValues = [];
-for (let i = 10; i <= 220; i += 20) {
+for (let i = 0; i <= 750; i += 100) {
   tickValues.push(i * 1e6);
 }
 
@@ -67,12 +67,6 @@ function App() {
       <div ref={chartWrapper} className="w-full md:w-3/4 mx-auto">
         <svg width={dimensions.width} height={dimensions.height}>
           <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
-            <GridRows
-              scale={yScale}
-              width={dimensions.boundedWidth}
-              stroke="#475569"
-              tickValues={tickValues}
-            />
             <AxisLeft
               scale={yScale}
               tickFormat={moneyFormatter}
@@ -90,8 +84,8 @@ function App() {
             />
             <AxisTop
               scale={xScale}
-              hideAxisLine
               hideTicks
+              hideAxisLine
               tickComponent={({ formattedValue, tickValue, ...tickProps }) => (
                 <Text
                   {...tickProps}
@@ -124,6 +118,12 @@ function App() {
                 </Text>
               </Group>
             ))}
+            <GridRows
+              scale={yScale}
+              width={dimensions.boundedWidth}
+              stroke="#475569"
+              tickValues={tickValues}
+            />
           </Group>
         </svg>
       </div>
