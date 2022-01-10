@@ -21,9 +21,9 @@ const data = [
 ];
 
 const moneyFormatter = (value) =>
-  `€ ${format(",.2f")(value).replace("G", "B")}`;
+  `€ ${format(",.2f")(value).replace("G", "MM")}`;
 
-const maxHeight = window.innerHeight * 32;
+const maxHeight = window.innerHeight * 28;
 
 const yScale = scaleLinear({
   domain: [0, data[1].value],
@@ -31,7 +31,7 @@ const yScale = scaleLinear({
 });
 
 const tickValues = [];
-for (let i = 0; i <= 750; i += 100) {
+for (let i = 0; i <= 750; i += 50) {
   tickValues.push(i * 1e6);
 }
 
