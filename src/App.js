@@ -3,10 +3,10 @@ import { format } from "d3-format";
 import { Group } from "@visx/group";
 import { AxisLeft, AxisTop } from "@visx/axis";
 import { Text } from "@visx/text";
-
-import useChartDimensions from "./useChartDimensions";
 import { GridRows } from "@visx/grid";
 import { leftTickLabelProps } from "@visx/axis/lib/axis/AxisLeft";
+
+import useChartDimensions from "./useChartDimensions";
 
 const data = [
   {
@@ -21,7 +21,7 @@ const data = [
 ];
 
 const moneyFormatter = (value) =>
-  `€ ${format(",.2f")(value).replace("G", "MM")}`;
+  value === 0 ? "€ 0" : `€ ${format(",.2f")(value).replace("G", "MM")}`;
 
 const maxHeight = window.innerHeight * 28;
 
@@ -54,6 +54,7 @@ function App() {
     range: [0, dimensions.boundedWidth],
     padding: 0.2,
   });
+  console.log();
 
   return (
     <div className="py-10 w-full md:w-9/12 mx-auto">
@@ -71,16 +72,18 @@ function App() {
               scale={yScale}
               tickFormat={moneyFormatter}
               hideAxisLine
-              hideZero
               hideTicks
               tickValues={tickValues}
-              tickLabelProps={() => ({
-                ...leftTickLabelProps,
-                textAnchor: "start",
-                fill: "#475569",
-                className: isOnSmallDisplay ? "text-xs" : "text-sm",
-                dy: -10,
-              })}
+              tickLabelProps={(value) => {
+                const isZero = value === 0;
+                return {
+                  ...leftTickLabelProps,
+                  textAnchor: isZero ? "end" : "start",
+                  fill: isZero ? "#94a3b8" : "#475569",
+                  className: isOnSmallDisplay ? "text-xs" : "text-sm",
+                  dy: isZero ? 5 : -10,
+                };
+              }}
             />
             <AxisTop
               scale={xScale}
