@@ -60,9 +60,15 @@ function App() {
     <div className="py-10 w-full md:w-9/12 mx-auto">
       <div className="text-gray-600 text-center my-4">
         <h1 className="text-3xl font-semibold mb-2 ">O que custa mais? 💸</h1>
-        <h2 className="text-base w-1/2 mx-auto">
-          30 anos de Rendimento Social de Inserção (RSI) para uma família de
-          três pessoas ou a dívida de Luís Filipe Vieira ao Novo Banco?
+        <h2 className="text-base w-1/2 mx-auto ">
+          (Recriação digital.{" "}
+          <a
+            className="text-blue-500 hover:text-blue-600 underline"
+            href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
+          >
+            Gráfico original
+          </a>{" "}
+          por LIVRE)
         </h2>
       </div>
       <div ref={chartWrapper} className="w-full md:w-3/4 mx-auto">
