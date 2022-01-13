@@ -17,7 +17,7 @@ const config = {
     scrollFactor: 24,
     detail: (
       <p>
-        Recriação digital.{" "}
+        <span className="font-bold">Recriação digital</span>.{" "}
         <a
           className="text-blue-500 hover:text-blue-600 underline"
           target="_blank"
