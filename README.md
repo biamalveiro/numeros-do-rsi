@@ -1,3 +1,5 @@
 # Os números do RSI
 
-https://osnumerosdorsi.netlify.app/
+https://www.osnumerosdorsi.com
+
+![Preview](preview.gif)

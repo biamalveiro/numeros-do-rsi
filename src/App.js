@@ -13,6 +13,8 @@ function App() {
     <div className="py-10 w-full md:w-9/12 mx-auto">
       <div className="text-gray-600 text-center my-4">
         <a
+          target="_blank"
+          rel="noopener noreferrer"
           href="https://github.com/biamalveiro/numeros-do-rsi"
           className="absolute top-0 right-0 m-2"
         >
