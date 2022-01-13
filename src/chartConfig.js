@@ -49,7 +49,7 @@ const config = {
       label: "⅓ dos salários da Administração Pública",
       value: 7759000000,
     },
-    scrollFactor: 14,
+    scrollFactor: 5,
     detail: (
       <>
         <p>
@@ -91,7 +91,7 @@ const config = {
       },
     ],
     color: "#93c5fd",
-    scrollFactor: 8,
+    scrollFactor: 4,
     reference: {
       label: "½ da população residente nos Açores",
       value: 118000,
