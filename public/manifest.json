@@ -1,6 +1,6 @@
 {
-  "short_name": "RSI ou LFV",
-  "name": "O que custa mais? RSI ou LFV",
+  "short_name": "Números do RSI",
+  "name": "Os números do RSI",
   "start_url": ".",
   "display": "standalone",
   "theme_color": "#000000",
