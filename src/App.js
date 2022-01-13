@@ -45,7 +45,7 @@ function App() {
           pobreza extrema. Mas afinal, que números são ou não comparáveis com os
           do RSI?{" "}
         </p>
-        <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-1/2">
+        <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-9/12 md:w-3/4">
           <button
             className={`${buttonStyle} ${
               chart === "LFV" ? "bg-slate-200" : ""
