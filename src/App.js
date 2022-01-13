@@ -1,60 +1,45 @@
-import { scaleLinear, scaleBand } from "@visx/scale";
-import { format } from "d3-format";
-import { Group } from "@visx/group";
-import { AxisLeft, AxisTop } from "@visx/axis";
-import { Text } from "@visx/text";
-import { GridRows } from "@visx/grid";
-import { leftTickLabelProps } from "@visx/axis/lib/axis/AxisLeft";
+import React, { useState } from "react";
 
-import useChartDimensions from "./useChartDimensions";
+import Chart from "./Chart";
 
-const data = [
-  {
-    label:
-      "Agregado familiar composto por um titular, um indivíduo menor, e outro maior (3 pessoas) a receber RSI durante 30 anos",
-    value: 500700.0,
+const chartProps = {
+  LFV: {
+    data: [
+      {
+        label:
+          "Agregado familiar composto por um titular, um indivíduo menor, e outro maior (3 pessoas) a receber RSI durante 30 anos",
+        value: 500700.0,
+      },
+      {
+        label: "Dívida de Luís Filipe Vieira [Promovalor] ao Novo Banco",
+        value: 760000000.0,
+      },
+    ],
+    color: "#fb923c",
+    scrollFactor: 24,
   },
-  {
-    label: "Dívida de Luís Filipe Vieira [Promovalor] ao Novo Banco",
-    value: 760000000.0,
+  AP: {
+    data: [
+      {
+        label: "Previsão no Orçamento de Estado de 2021 para RSI",
+        value: 364000000.0,
+      },
+      {
+        label:
+          "Previsão no Orçamento de Estado de 2021 para salários da Administração Pública",
+        value: 23277000000.0,
+      },
+    ],
+    color: "#34d399",
+    scrollFactor: 14,
   },
-];
+};
 
-const moneyFormatter = (value) =>
-  value === 0 ? "€ 0" : `€ ${format(",.2f")(value).replace("G", "MM")}`;
-
-const maxHeight = window.innerHeight * 28;
-
-const yScale = scaleLinear({
-  domain: [0, data[1].value],
-  range: [0, maxHeight],
-});
-
-const tickValues = [];
-for (let i = 0; i <= 750; i += 50) {
-  tickValues.push(i * 1e6);
-}
-
-const isOnSmallDisplay = document.documentElement.clientWidth <= 768;
-
-const MARGIN_Y = 100;
-const MARGIN_X = isOnSmallDisplay ? 20 : 100;
+const buttonStyle =
+  "inline-block px-2 py-1 text-xs text-center text-slate-500 uppercase border-2 bg-white transition duration-200 ease-in-out border-slate-500  rounded-md cursor-pointer hover:border-slate-600 hover:bg-slate-100";
 
 function App() {
-  const [chartWrapper, dimensions] = useChartDimensions({
-    height: maxHeight + 2 * MARGIN_Y,
-    marginTop: MARGIN_Y,
-    marginBottom: MARGIN_Y,
-    marginLeft: MARGIN_X,
-    marginRight: MARGIN_X,
-  });
-
-  const xScale = scaleBand({
-    domain: data.map((d) => d.label),
-    range: [0, dimensions.boundedWidth],
-    padding: 0.2,
-  });
-  console.log();
+  const [chart, setChart] = useState("AP");
 
   return (
     <div className="py-10 w-full md:w-9/12 mx-auto">
@@ -78,81 +63,48 @@ function App() {
         </a>
         <h1 className="text-3xl font-semibold mb-2 ">O que custa mais? 💸</h1>
         <h2 className="text-base w-1/2 mx-auto ">
-          (Recriação digital.{" "}
-          <a
-            className="text-blue-500 hover:text-blue-600 underline"
-            href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
-          >
-            Gráfico original
-          </a>{" "}
-          por LIVRE)
+          <p className="my-2">
+            Nos debates das legislativas de 2021, André Ventura tem
+            frequentemente criticado o custo do Rendimento Social de Inserçao.
+            Mas afinal, quanto custa realmetne o RSI?{" "}
+          </p>
+          <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8">
+            <button
+              className={`${buttonStyle} ${
+                chart === "LFV" ? "bg-slate-200" : ""
+              }`}
+              onClick={() => setChart("LFV")}
+            >
+              RSI e Luís Filipe Vieira
+            </button>
+            <button
+              className={`${buttonStyle} ${
+                chart === "AP" ? "bg-slate-200" : ""
+              }`}
+              onClick={() => setChart("AP")}
+            >
+              RSI e salários da Administração Pública
+            </button>
+          </div>
+          <p className="mt-2 text-gray-400 text-sm">
+            {chart === "LFV" ? (
+              <>
+                (Recriação digital.{" "}
+                <a
+                  className="text-blue-500 hover:text-blue-600 underline"
+                  href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
+                >
+                  Gráfico original
+                </a>{" "}
+                por LIVRE)
+              </>
+            ) : (
+              "publico source"
+            )}
+          </p>
         </h2>
       </div>
-      <div ref={chartWrapper} className="w-full md:w-3/4 mx-auto">
-        <svg width={dimensions.width} height={dimensions.height}>
-          <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
-            <AxisLeft
-              scale={yScale}
-              tickFormat={moneyFormatter}
-              hideAxisLine
-              hideTicks
-              tickValues={tickValues}
-              tickLabelProps={(value) => {
-                const isZero = value === 0;
-                return {
-                  ...leftTickLabelProps,
-                  textAnchor: isZero ? "end" : "start",
-                  fill: isZero ? "#94a3b8" : "#475569",
-                  className: isOnSmallDisplay ? "text-xs" : "text-sm",
-                  dy: isZero ? 5 : -10,
-                };
-              }}
-            />
-            <AxisTop
-              scale={xScale}
-              hideTicks
-              hideAxisLine
-              tickComponent={({ formattedValue, tickValue, ...tickProps }) => (
-                <Text
-                  {...tickProps}
-                  width={xScale.step()}
-                  className={isOnSmallDisplay ? "text-xs" : "text-sm"}
-                  fill="#475569"
-                >
-                  {formattedValue}
-                </Text>
-              )}
-            />
-            {data.map((d, i) => (
-              <Group key={`bar-${i}`}>
-                <rect
-                  x={xScale(d.label)}
-                  y={0}
-                  height={yScale(d.value)}
-                  width={xScale.bandwidth()}
-                  fill="#ff9800"
-                />
-                <Text
-                  x={xScale(d.label) + xScale.bandwidth() / 2}
-                  y={yScale(d.value)}
-                  textAnchor="middle"
-                  dy={20}
-                  className="text-sm"
-                  fill="#475569"
-                >
-                  {moneyFormatter(d.value)}
-                </Text>
-              </Group>
-            ))}
-            <GridRows
-              scale={yScale}
-              width={dimensions.boundedWidth}
-              stroke="#475569"
-              tickValues={tickValues}
-            />
-          </Group>
-        </svg>
-      </div>
+      <Chart {...chartProps[chart]} chart={chart} />
     </div>
   );
 }
