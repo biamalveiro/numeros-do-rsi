@@ -45,7 +45,7 @@ function App() {
           pobreza extrema. Mas afinal, que números são ou não comparáveis com os
           do RSI?{" "}
         </p>
-        <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-1/2">
+        <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-9/12 md:w-3/4">
           <button
             className={`${buttonStyle} ${
               chart === "LFV" ? "bg-slate-200" : ""
@@ -55,18 +55,18 @@ function App() {
             RSI e Luís Filipe Vieira
           </button>
           <button
-            className={`${buttonStyle} ${chart === "AP" ? "bg-slate-200" : ""}`}
-            onClick={() => setChart("AP")}
-          >
-            RSI e salários da Administração Pública
-          </button>
-          <button
             className={`${buttonStyle} ${
               chart === "Azores" ? "bg-slate-200" : ""
             }`}
             onClick={() => setChart("Azores")}
           >
             RSI nos Açores
+          </button>
+          <button
+            className={`${buttonStyle} ${chart === "AP" ? "bg-slate-200" : ""}`}
+            onClick={() => setChart("AP")}
+          >
+            RSI e salários da Administração Pública
           </button>
         </div>
         <div className="mt-2 text-gray-400 text-sm w-3/4 md:w-1/2 mx-auto">

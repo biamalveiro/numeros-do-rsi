@@ -17,7 +17,7 @@ const config = {
     scrollFactor: 24,
     detail: (
       <p>
-        (Recriação digital.{" "}
+        Recriação digital.{" "}
         <a
           className="text-blue-500 hover:text-blue-600 underline"
           target="_blank"
@@ -26,7 +26,8 @@ const config = {
         >
           Gráfico original
         </a>{" "}
-        por LIVRE)
+        mostrado por Rui Tavares no debate com André Ventura, no dia 5 de
+        janeiro de 2022, na CNN Portugal.
       </p>
     ),
     formatter: (value) => (value === 0 ? "€ 0" : `€ ${format(",.2f")(value)}`),
@@ -34,7 +35,7 @@ const config = {
   AP: {
     data: [
       {
-        label: "Previsão no Orçamento de Estado de 2021 para RSI",
+        label: "Previsão no Orçamento de Estado de 2021 para o RSI",
         value: 364000000.0,
       },
       {
@@ -45,7 +46,7 @@ const config = {
     ],
     color: "#34d399",
     reference: {
-      label: "1/3 dos salários da Administração Pública",
+      label: "⅓ dos salários da Administração Pública",
       value: 7759000000,
     },
     scrollFactor: 14,
@@ -92,7 +93,7 @@ const config = {
     color: "#93c5fd",
     scrollFactor: 8,
     reference: {
-      label: "1/2 da população residente nos Açores",
+      label: "½ da população residente nos Açores",
       value: 118000,
     },
     detail: (
