@@ -7,7 +7,7 @@ const buttonStyle =
   "inline-block px-2 py-1 text-xs text-center text-slate-500 uppercase border-2 bg-white transition duration-200 ease-in-out border-slate-500  rounded-md cursor-pointer hover:border-slate-600 hover:bg-slate-100";
 
 function App() {
-  const [chart, setChart] = useState("AP");
+  const [chart, setChart] = useState("LFV");
 
   return (
     <div className="py-10 w-full md:w-9/12 mx-auto">
