@@ -4,7 +4,6 @@ import { AxisLeft, AxisTop } from "@visx/axis";
 import { Text } from "@visx/text";
 import { GridRows } from "@visx/grid";
 import { leftTickLabelProps } from "@visx/axis/lib/axis/AxisLeft";
-import { format } from "d3-format";
 import { scaleLinear, scaleBand } from "@visx/scale";
 import { max } from "d3-array";
 
@@ -14,16 +13,16 @@ const isOnSmallDisplay = document.documentElement.clientWidth <= 768;
 
 const MARGIN_Y = 100;
 const MARGIN_X = isOnSmallDisplay ? 20 : 100;
-const REF_VALUE = 7759000000;
 const REF_COLOR = "#ef4444";
 
-const moneyFormatter = (value, chart) => {
-  if (value === 0) return "€ 0";
-  if (chart === "LFV") return `€ ${format(",.2f")(value)}`;
-  if (chart === "AP") return `€ ${format(",~g")(value / 10e5)} M`;
-};
-
-export default function Chart({ data, color, scrollFactor, chart }) {
+export default function Chart({
+  data,
+  color,
+  scrollFactor,
+  chart,
+  formatter,
+  reference,
+}) {
   const maxHeight = window.innerHeight * scrollFactor;
   const [chartWrapper, dimensions] = useChartDimensions({
     height: maxHeight + 2 * MARGIN_Y,
@@ -52,7 +51,7 @@ export default function Chart({ data, color, scrollFactor, chart }) {
         <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
           <AxisLeft
             scale={yScale}
-            tickFormat={(value) => moneyFormatter(value, chart)}
+            tickFormat={formatter}
             hideAxisLine
             hideTicks
             numTicks={scrollFactor}
@@ -99,7 +98,7 @@ export default function Chart({ data, color, scrollFactor, chart }) {
                 className="text-sm"
                 fill="#475569"
               >
-                {moneyFormatter(d.value, chart)}
+                {formatter(d.value)}
               </Text>
             </Group>
           ))}
@@ -109,35 +108,35 @@ export default function Chart({ data, color, scrollFactor, chart }) {
             stroke="#475569"
             numTicks={scrollFactor}
           />
-          {chart === "AP" && (
+          {chart !== "LFV" && (
             <Group>
               <rect
                 x={0}
-                y={yScale(REF_VALUE)}
+                y={yScale(reference.value)}
                 height={1}
                 width={dimensions.boundedWidth}
                 fill={REF_COLOR}
               />
               <Text
                 x={0}
-                y={yScale(REF_VALUE)}
+                y={yScale(reference.value)}
                 dy={-10}
                 verticalAnchor="end"
                 fill={REF_COLOR}
                 className={isOnSmallDisplay ? "text-xs" : "text-sm"}
               >
-                {moneyFormatter(REF_VALUE, chart)}
+                {formatter(reference.value)}
               </Text>
               <Text
                 x={0}
-                y={yScale(REF_VALUE)}
+                y={yScale(reference.value)}
                 dy={10}
                 textAnchor="start"
                 verticalAnchor="start"
                 fill={REF_COLOR}
                 className={isOnSmallDisplay ? "text-xs" : "text-sm"}
               >
-                1/3 dos salários da Administração Pública
+                {reference.label}
               </Text>
             </Group>
           )}

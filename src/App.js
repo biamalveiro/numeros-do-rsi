@@ -1,39 +1,7 @@
 import React, { useState } from "react";
 
 import Chart from "./Chart";
-
-const chartProps = {
-  LFV: {
-    data: [
-      {
-        label:
-          "Agregado familiar composto por um titular, um indivíduo menor, e outro maior (3 pessoas) a receber RSI durante 30 anos",
-        value: 500700.0,
-      },
-      {
-        label: "Dívida de Luís Filipe Vieira [Promovalor] ao Novo Banco",
-        value: 760000000.0,
-      },
-    ],
-    color: "#fb923c",
-    scrollFactor: 24,
-  },
-  AP: {
-    data: [
-      {
-        label: "Previsão no Orçamento de Estado de 2021 para RSI",
-        value: 364000000.0,
-      },
-      {
-        label:
-          "Previsão no Orçamento de Estado de 2021 para salários da Administração Pública",
-        value: 23277000000.0,
-      },
-    ],
-    color: "#34d399",
-    scrollFactor: 14,
-  },
-};
+import chartConfig from "./chartConfig";
 
 const buttonStyle =
   "inline-block px-2 py-1 text-xs text-center text-slate-500 uppercase border-2 bg-white transition duration-200 ease-in-out border-slate-500  rounded-md cursor-pointer hover:border-slate-600 hover:bg-slate-100";
@@ -45,7 +13,7 @@ function App() {
     <div className="py-10 w-full md:w-9/12 mx-auto">
       <div className="text-gray-600 text-center my-4">
         <a
-          href="https://github.com/biamalveiro/rsi-vs-lfv"
+          href="https://github.com/biamalveiro/numeros-do-rsi"
           className="absolute top-0 right-0 m-2"
         >
           <svg
@@ -61,50 +29,44 @@ function App() {
             ></path>
           </svg>
         </a>
-        <h1 className="text-3xl font-semibold mb-2 ">O que custa mais? 💸</h1>
-        <h2 className="text-base w-1/2 mx-auto ">
-          <p className="my-2">
-            Nos debates das legislativas de 2021, André Ventura tem
-            frequentemente criticado o custo do Rendimento Social de Inserçao.
-            Mas afinal, quanto custa realmetne o RSI?{" "}
-          </p>
-          <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8">
-            <button
-              className={`${buttonStyle} ${
-                chart === "LFV" ? "bg-slate-200" : ""
-              }`}
-              onClick={() => setChart("LFV")}
-            >
-              RSI e Luís Filipe Vieira
-            </button>
-            <button
-              className={`${buttonStyle} ${
-                chart === "AP" ? "bg-slate-200" : ""
-              }`}
-              onClick={() => setChart("AP")}
-            >
-              RSI e salários da Administração Pública
-            </button>
-          </div>
-          <p className="mt-2 text-gray-400 text-sm">
-            {chart === "LFV" ? (
-              <>
-                (Recriação digital.{" "}
-                <a
-                  className="text-blue-500 hover:text-blue-600 underline"
-                  href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
-                >
-                  Gráfico original
-                </a>{" "}
-                por LIVRE)
-              </>
-            ) : (
-              "publico source"
-            )}
-          </p>
-        </h2>
+        <h1 className="text-3xl font-semibold mb-2 ">Os números do RSI 💰</h1>
+        <p className="my-2 w-3/4 md:w-1/2  mx-auto">
+          Nos recentes debates no contexto das eleições legislativas de 2022,
+          André Ventura tem reforçado a sua posição crítica sobre o Rendimento
+          Social de Inserção (RSI), rendimento é pago pela Segurança Social a
+          pessoas em situação de pobreza extrema. Mas afinal, que números são ou
+          não comparáveis com os do RSI?{" "}
+        </p>
+        <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-1/2">
+          <button
+            className={`${buttonStyle} ${
+              chart === "LFV" ? "bg-slate-200" : ""
+            }`}
+            onClick={() => setChart("LFV")}
+          >
+            RSI e Luís Filipe Vieira
+          </button>
+          <button
+            className={`${buttonStyle} ${chart === "AP" ? "bg-slate-200" : ""}`}
+            onClick={() => setChart("AP")}
+          >
+            RSI e salários da Administração Pública
+          </button>
+          <button
+            className={`${buttonStyle} ${
+              chart === "Azores" ? "bg-slate-200" : ""
+            }`}
+            onClick={() => setChart("Azores")}
+          >
+            RSI nos Açores
+          </button>
+        </div>
+        <div className="mt-2 text-gray-400 text-sm w-3/4 md:w-1/2 mx-auto">
+          {chartConfig[chart].detail}
+        </div>
       </div>
-      <Chart {...chartProps[chart]} chart={chart} />
+
+      <Chart {...chartConfig[chart]} chart={chart} />
     </div>
   );
 }
