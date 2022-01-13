@@ -20,6 +20,8 @@ const config = {
         (Recriação digital.{" "}
         <a
           className="text-blue-500 hover:text-blue-600 underline"
+          target="_blank"
+          rel="noopener noreferrer"
           href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
         >
           Gráfico original
@@ -63,6 +65,8 @@ const config = {
         <p className="mt-2">
           Fact-checking por{" "}
           <a
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-blue-500 hover:text-blue-600 underline"
             href="https://www.publico.pt/2022/01/10/politica/noticia/despesa-rsi-terco-salarios-administracao-publica-1991343"
           >

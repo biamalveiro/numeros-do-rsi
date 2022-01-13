@@ -35,6 +35,8 @@ function App() {
           André Ventura tem reforçado a sua posição crítica sobre o{" "}
           <a
             href="https://www.seg-social.pt/rendimento-social-de-insercao"
+            target="_blank"
+            rel="noopener noreferrer"
             className="text-blue-500 hover:text-blue-600 underline"
           >
             Rendimento Social de Inserção (RSI)
