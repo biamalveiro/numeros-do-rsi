@@ -32,10 +32,16 @@ function App() {
         <h1 className="text-3xl font-semibold mb-2 ">Os números do RSI 💰</h1>
         <p className="my-2 w-3/4 md:w-1/2  mx-auto">
           Nos recentes debates no contexto das eleições legislativas de 2022,
-          André Ventura tem reforçado a sua posição crítica sobre o Rendimento
-          Social de Inserção (RSI), rendimento é pago pela Segurança Social a
-          pessoas em situação de pobreza extrema. Mas afinal, que números são ou
-          não comparáveis com os do RSI?{" "}
+          André Ventura tem reforçado a sua posição crítica sobre o{" "}
+          <a
+            href="https://www.seg-social.pt/rendimento-social-de-insercao"
+            className="text-blue-500 hover:text-blue-600 underline"
+          >
+            Rendimento Social de Inserção (RSI)
+          </a>
+          , rendimento que é pago pela Segurança Social a pessoas em situação de
+          pobreza extrema. Mas afinal, que números são ou não comparáveis com os
+          do RSI?{" "}
         </p>
         <div className="flex flex-row flex-wrap gap-2 mx-auto justify-center mt-8 w-1/2">
           <button
