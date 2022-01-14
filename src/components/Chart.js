@@ -7,27 +7,27 @@ import { leftTickLabelProps } from "@visx/axis/lib/axis/AxisLeft";
 import { scaleLinear, scaleBand } from "@visx/scale";
 import { max } from "d3-array";
 
-import useChartDimensions from "./useChartDimensions";
+import useChartDimensions from "./../hooks/useChartDimensions";
 
 const isOnSmallDisplay = document.documentElement.clientWidth <= 768;
 
-const MARGIN_Y = 100;
-const MARGIN_X = isOnSmallDisplay ? 20 : 100;
+const MARGIN_Y = 90;
+const MARGIN_X = isOnSmallDisplay ? 30 : 100;
 const REF_COLOR = "#ef4444";
 
 export default function Chart({
   data,
   color,
-  scrollFactor,
   chart,
   formatter,
   reference,
+  scrollFactor,
 }) {
   const maxHeight = window.innerHeight * scrollFactor;
   const [chartWrapper, dimensions] = useChartDimensions({
     height: maxHeight + 2 * MARGIN_Y,
-    marginTop: MARGIN_Y,
-    marginBottom: MARGIN_Y,
+    marginTop: chart === "LFV" ? 120 : MARGIN_Y,
+    marginBottom: MARGIN_Y / 2,
     marginLeft: MARGIN_X,
     marginRight: MARGIN_X,
   });
@@ -46,7 +46,7 @@ export default function Chart({
   });
 
   return (
-    <div ref={chartWrapper} className="w-full md:w-3/4 mx-auto">
+    <div ref={chartWrapper} className="w-full md:w-3/4 mx-auto ">
       <svg width={dimensions.width} height={dimensions.height}>
         <Group top={dimensions.marginTop} left={dimensions.marginLeft}>
           <AxisLeft

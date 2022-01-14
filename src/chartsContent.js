@@ -19,7 +19,7 @@ const config = {
       <p>
         <span className="font-bold">Recriação digital</span>.{" "}
         <a
-          className="text-blue-500 hover:text-blue-600 underline"
+          className="link"
           target="_blank"
           rel="noopener noreferrer"
           href="https://twitter.com/ruitavares/status/1478877669387390976/photo/1"
@@ -31,6 +31,7 @@ const config = {
       </p>
     ),
     formatter: (value) => (value === 0 ? "€ 0" : `€ ${format(",.2f")(value)}`),
+    buttonLabel: "RSI e Luís Filipe Vieira",
   },
   AP: {
     data: [
@@ -54,11 +55,10 @@ const config = {
       <>
         <p>
           <span className="italic">
-            "Temos hoje um valor de Rendimento Social de Inserção (RSI)
-            extraordinariamente elevado. Estamos a falar de mais de 300 milhões
-            por ano. Só para as pessoas terem uma ideia é um terço, é um
-            bocadinho mais do que um terço de todos os salários da Administração
-            Pública."
+            "Temos hoje um valor de RSI extraordinariamente elevado. Estamos a
+            falar de mais de 300 milhões por ano. Só para as pessoas terem uma
+            ideia é um terço, é um bocadinho mais do que um terço de todos os
+            salários da Administração Pública."
           </span>{" "}
           - André Ventura, no debate com João Cotrim de Figueiredo, dia 9 de
           janeiro de 2022 na CNN Portugal
@@ -68,7 +68,7 @@ const config = {
           <a
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-500 hover:text-blue-600 underline"
+            className="link"
             href="https://www.publico.pt/2022/01/10/politica/noticia/despesa-rsi-terco-salarios-administracao-publica-1991343"
           >
             Público
@@ -78,6 +78,7 @@ const config = {
     ),
     formatter: (value) =>
       value === 0 ? "€ 0" : `€ ${format(",~g")(value / 10e5)} M`,
+    buttonLabel: "RSI e salários da Administração Pública",
   },
   Azores: {
     data: [
@@ -91,7 +92,7 @@ const config = {
       },
     ],
     color: "#93c5fd",
-    scrollFactor: 4,
+    scrollFactor: 2.8,
     reference: {
       label: "½ da população residente nos Açores",
       value: 118000,
@@ -110,7 +111,7 @@ const config = {
         <p className="mt-2">
           Fact-checking por{" "}
           <a
-            className="text-blue-500 hover:text-blue-600 underline"
+            className="link"
             href="https://poligrafo.sapo.pt/fact-check/ventura-sobre-o-rsi-nos-acores-anda-metade-a-viver-a-conta-dos-outros-que-estao-a-trabalhar-tem-razao"
           >
             Polígrafo
@@ -119,6 +120,7 @@ const config = {
       </>
     ),
     formatter: (value) => `${format(",~g")(value)}`,
+    buttonLabel: "RSI nos Açores",
   },
 };
 
